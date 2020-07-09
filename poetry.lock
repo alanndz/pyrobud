@@ -620,6 +620,11 @@ optional = false
 python-versions = ">=3.6"
 version = "3.1.0"
 
+[package.dependencies]
+beautifulsoup4 = ">=4.8.0"
+googletrans = ">=2.3.0"
+newspaper3k = ">=0.2.5"
+
 [package.extras]
 docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
