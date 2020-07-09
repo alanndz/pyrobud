@@ -9,7 +9,7 @@ from pyrobud import command, module, util
 tl = Translator()
 
 class Translate(module.Module):
-    name: str="Markdowns"
+    name: str="Translate"
     disabled: bool= False
 
     @command.desc("Translate")
