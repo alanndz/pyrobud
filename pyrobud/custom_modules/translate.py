@@ -21,10 +21,8 @@ class Translate(module.Module):
         if not lang:
             return "Enter lang to translate, example: `en, id`"
 
-        text = ctx.msg.get_reply_message()
-        if text.file:
-            return "Is file, cant translate, please reply a message"
-
+        text = await ctx.msg.get_reply_message()
+        text = text.text
         detectlang = tl.detect(text)
 
         try:
@@ -32,4 +30,4 @@ class Translate(module.Module):
         except ValueError as err:
             return "Error: `{}`".format(str(err))
 
-        return "Translate from `{}` to `{}`:\n```{}```".format(detectlang.lang, lang, tekstr.text)
+        return "Translate from `{}` to `{}`:\n\n```{}```".format(detectlang.lang, lang, tekstr.text)
