@@ -6,8 +6,6 @@ Author: alanndz alanmahmud0@gmail.com
 from googletrans import Translator
 from pyrobud import command, module, util
 
-tl = Translator()
-
 class Translate(module.Module):
     name: str="Translate"
     disabled: bool= False
@@ -20,6 +18,8 @@ class Translate(module.Module):
 
         if not lang:
             return "Enter lang to translate, example: `en, id`"
+
+        tl = Translator()
 
         text = await ctx.msg.get_reply_message()
         text = text.text

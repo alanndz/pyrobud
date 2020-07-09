@@ -14,9 +14,6 @@ from googletrans import Translator
 
 from pyrobud import command, module
 
-tgr = Telegraph()
-tl = Translator()
-
 class WebReader(module.Module):
     name: str = "WebReader"
     disabled: bool = False
@@ -30,6 +27,9 @@ class WebReader(module.Module):
         if len(ctx.input.split()) > 1:
             lang = ctx.input.split()[1]
         else: lang = None
+
+        tgr = Telegraph()
+        tl = Translator()
 
         url: str = ctx.input or ctx.segments[1]
         url: str = re.search(self.regex, url).group(1)
