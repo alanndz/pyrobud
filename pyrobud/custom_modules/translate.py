@@ -16,18 +16,20 @@ class Translate(module.Module):
     @command.alias("tr")
     @command.usage("[lang]", reply=True)
     async def cmd_translate(self, ctx: command.Context) -> str:
-        input_text = ctx.input
+        lang = ctx.input
 
-        status, text = await util.tg.get_text_input(ctx, input_text)
-        if not status:
-            if isinstance(text, str):
-                return text
-            return "__Unknown error.__"
+        if not lang:
+            return "Enter lang to translate, example: `en, id`"
+
+        text = ctx.msg.get_reply_message()
+        if text.file:
+            return "Is file, cant translate, please reply a message"
 
         detectlang = tl.detect(text)
 
         try:
-            tekstr = tl.translate(text, dest=input_text)
+            tekstr = tl.translate(text, dest=lang)
         except ValueError as err:
-            return ("Error: `{}`".format(str(err)))
-        return "Translate from `{}` to `{}`:\n```{}```".format(detectlang.lang, input_text, tekstr.text)
+            return "Error: `{}`".format(str(err))
+
+        return "Translate from `{}` to `{}`:\n```{}```".format(detectlang.lang, lang, tekstr.text)
